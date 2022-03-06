@@ -1,6 +1,6 @@
 name: Create Matrix Action
 
-description: This action creates a matrix from an input string.
+description: This action creates a matrix json file from an input string.
 
 inputs:
   
