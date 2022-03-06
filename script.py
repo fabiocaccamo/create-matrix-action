@@ -2,7 +2,7 @@
 
 from itertools import product
 
-import fsutil
+import json
 import os
 import re
 
@@ -25,7 +25,9 @@ def main():
             for item in value:
                 matrix_item.update(item)
             matrix_items.append(matrix_item)
-    fsutil.write_file_json("./matrix.json", matrix_items)
+    matrix_json = json.dumps(matrix_items)
+    with open("./matrix.json", "w", encoding="utf-8") as matrix_file:
+        matrix_file.write(matrix_json)
 
 
 if __name__ == "__main__":
