@@ -9,12 +9,13 @@ jobs:
   create_matrix:
     
     runs-on: ubuntu-latest  
+    
     steps:
       
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - name: Run Action
+      - name: Create Matrix
         uses: ./
         with:
           matrix: |
@@ -24,13 +25,13 @@ jobs:
             python-version {3.8}, django-version {2.2,3.0,3.1,3.2}, database {sqlite,mysql,postgres}
             python-version {3.9}, django-version {2.2,3.0,3.1,3.2}, database {sqlite,mysql,postgres}
             python-version {3.10}, django-version {3.2,4.0}, database {sqlite,mysql,postgres}
-      
-      - name: Set matrix output variable with matrix.json file content
-        id: set-matrix
-        run: |
-          cat "./matrix.json"
-          echo "::set-output name=matrix::$(cat ./matrix.json)" 
-
+        
+      # - name: Set matrix output variable with matrix.json file content
+      #  id: set-matrix
+      #  run: |
+      #    cat "./matrix.json"
+      #    echo "::set-output name=matrix::$(cat ./matrix.json)" 
+        
   test:
     
     needs: create_matrix
@@ -38,7 +39,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: 
-        include: ${{fromJson(needs.create_matrix.outputs.matrix)}}
+        include: ${{fromJson($(cat ./matrix.json))}}
       
     steps:
       - uses: actions/checkout@v2
@@ -57,7 +58,7 @@ jobs:
         run: |
           pip install "Django~=${{ matrix.django-version }}"
       
-      - name: Debug matrix versions
+      - name: Debug matrix
         run: |
           echo "Python ${{ matrix.python-version }} + Django ${{ matrix.django-version }} + Database ${{ matrix.database }}"
           echo "Python: `python --version`"
