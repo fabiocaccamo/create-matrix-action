@@ -4,13 +4,9 @@ description: This action creates a matrix json file from an input string.
 
 inputs:
   
-  matrix_input_string:
+  matrix:
     required: true
     description: The string that will be parsed for creating the matrix.
-  
-  matrix_output_json:
-    required: true
-    description: The json file where the generated matrix will be saved.
 
 runs:
   using: docker
