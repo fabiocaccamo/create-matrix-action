@@ -28,6 +28,7 @@ jobs:
       - name: Set matrix output variable with matrix.json file content
         id: set-matrix
         run: |
+          cat "./matrix.json"
           echo "::set-output name=matrix::$(cat ./matrix.json)" 
 
   test:
