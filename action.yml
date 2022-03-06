@@ -1,0 +1,14 @@
+name: Create Matrix Action
+description: This action creates a matrix from an input string.
+inputs:
+  matrix: # name of variable. In action script it will be available in workflow as environment variable with name INPUT_MATRIX
+    required: true
+    description: The string that will be parsed for creating the matrix.
+
+runs:
+  using: docker
+  image: 'Dockerfile'
+
+branding:
+  icon: test_tube
+  color: black
