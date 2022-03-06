@@ -8,7 +8,7 @@ import re
 
 
 def main():
-    matrix_str = os.environ['INPUT_MATRIX_INPUT_STRING']
+    matrix_str = os.environ["INPUT_MATRIX"]
     matrix_lines = list(filter(bool, [line.strip() for line in matrix_str.splitlines()]))
     matrix_items = []
     for line in matrix_lines:
@@ -25,7 +25,7 @@ def main():
             for item in value:
                 matrix_item.update(item)
             matrix_items.append(matrix_item)
-    fsutil.write_file_json(os.environ['INPUT_MATRIX_OUTPUT_JSON'], matrix_items)
+    fsutil.write_file_json("./matrix.json", matrix_items)
 
 
 if __name__ == "__main__":
