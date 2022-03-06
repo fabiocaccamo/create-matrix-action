@@ -10,6 +10,9 @@ jobs:
     
     runs-on: ubuntu-latest  
     
+    outputs:
+      matrix: ${{ steps.set_matrix.outputs.matrix }}
+    
     steps:
       
       - name: Checkout code
@@ -29,16 +32,7 @@ jobs:
       - name: Set matrix output variable with matrix.json file content
         id: set_matrix
         run: |
-          content=`cat ./matrix.json`
-          # the following lines are only required for multi line json
-          # content="${content//'%'/'%25'}"
-          # content="${content//$'\n'/'%0A'}"
-          # content="${content//$'\r'/'%0D'}"
-          # end of optional handling for multi line json
-          echo "::set-output name=matrix::$content"
-          
-          # cat "./matrix.json"
-          # echo "::set-output name=matrix::$(`cat ./matrix.json`)" 
+          echo "::set-output name=matrix::$(cat ./matrix.json)" 
         
   test:
     
