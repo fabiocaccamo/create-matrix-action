@@ -6,7 +6,7 @@
 
 # create-matrix-action
 
-This action creates a non-square matrix on the fly from parsing a matrix configuration declared in the workflow file.
+This action creates a non-square matrix from parsing a matrix configuration declared in the workflow file.
 
 I wrote this action for my python/django testing needs, but it is very flexible, so it can be used in many other contexts.
 
