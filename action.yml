@@ -1,17 +1,15 @@
 name: Create Matrix Action
-
-description: This action creates a matrix json file from an input string.
+description: This action creates a non-square matrix from an input string.
 
 inputs:
-  
   matrix:
     required: true
-    description: The string that will be parsed for creating the matrix.
+    description: The matrix string definition.
 
 runs:
   using: docker
   image: 'Dockerfile'
 
 branding:
-  icon: test_tube
-  color: black
+  icon: grid
+  color: yellow
