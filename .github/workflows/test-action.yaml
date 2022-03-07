@@ -10,9 +10,6 @@ jobs:
     
     runs-on: ubuntu-latest  
     
-    outputs:
-      matrix: ${{ steps.set_matrix.outputs.matrix }}
-    
     steps:
       
       - name: Checkout code
@@ -33,7 +30,10 @@ jobs:
         id: set_matrix
         run: |
           echo "::set-output name=matrix::$(cat ./matrix.json)" 
-        
+          
+    outputs:
+      matrix: ${{ steps.set_matrix.outputs.matrix }}
+    
   test:
     
     needs: create_matrix
