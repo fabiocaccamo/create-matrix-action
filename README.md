@@ -8,7 +8,7 @@
 
 This action creates a non-square matrix from parsing a matrix configuration declared in the workflow file.
 
-I wrote this action for my python/django testing needs, but it is very flexible, so it can be used in many other contexts.
+I wrote this action for my python/django testing needs, but it is very flexible and scalable, so it can be used in many other contexts.
 
 ## Matrix configuration
 
@@ -21,6 +21,8 @@ python-version {3.8}, django-version {2.2,3.0,3.1,3.2}, database {sqlite,mysql,p
 python-version {3.9}, django-version {2.2,3.0,3.1,3.2}, database {sqlite,mysql,postgres}
 python-version {3.10}, django-version {3.2,4.0}, database {sqlite,mysql,postgres}
 ```
+
+> Note: *In the above example, `python-version`, `django-version` and `database` are just the matrix variable names that we can access in the following step, so it is possible to name these variables as needed.*
 
 ## Workflow
 
@@ -77,3 +79,8 @@ jobs:
 ```
 
 Check the full [test-action.yaml](https://github.com/fabiocaccamo/create-matrix-action/blob/main/.github/workflows/test-action.yaml) workflow file.
+
+---
+
+## License
+Released under [MIT License](LICENSE).
