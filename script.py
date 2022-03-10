@@ -5,6 +5,7 @@ from itertools import product
 import json
 import os
 import re
+import sys
 
 
 def main():
@@ -26,8 +27,7 @@ def main():
                 matrix_item.update(item)
             matrix_items.append(matrix_item)
     matrix_json = json.dumps(matrix_items)
-    with open("./matrix.json", "w", encoding="utf-8") as matrix_file:
-        matrix_file.write(matrix_json)
+    sys.stdout.write(f"::set-output name=matrix::{matrix_json}")
 
 
 if __name__ == "__main__":

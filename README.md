@@ -22,7 +22,7 @@ python-version {3.9}, django-version {2.2,3.0,3.1,3.2}, database {sqlite,mysql,p
 python-version {3.10}, django-version {3.2,4.0}, database {sqlite,mysql,postgres}
 ```
 
-> Note: *In the above example, `python-version`, `django-version` and `database` are just the matrix variable names that we can access in the following step, so it is possible to name these variables as needed.*
+> **Note:** *In the above example, `python-version`, `django-version` and `database` are just the matrix variable names that we can access in the following step, so it is possible to name these variables as needed.*
 
 ## Workflow
 
@@ -35,12 +35,15 @@ jobs:
   create_matrix:
     
     runs-on: ubuntu-latest  
+    
     steps:
+      
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - name: Create matrix
-        uses: fabiocaccamo/create-matrix-action@v1
+      - name: Set matrix
+        id: set_matrix
+        uses: fabiocaccamo/create-matrix-action@v2
         with:
           matrix: |
             python-version {2.7}, django-version {1.7,1.8,1.9,1.10,1.11}, database {sqlite,mysql,postgres}
@@ -49,14 +52,9 @@ jobs:
             python-version {3.8}, django-version {2.2,3.0,3.1,3.2}, database {sqlite,mysql,postgres}
             python-version {3.9}, django-version {2.2,3.0,3.1,3.2}, database {sqlite,mysql,postgres}
             python-version {3.10}, django-version {3.2,4.0}, database {sqlite,mysql,postgres}
-
-      - name: Set matrix output variable 
-        id: set_matrix
-        run: |
-          echo "::set-output name=matrix::$(cat ./matrix.json)" 
-     
-     outputs:
-        matrix: ${{ steps.set_matrix.outputs.matrix }}
+          
+    outputs:
+      matrix: ${{ steps.set_matrix.outputs.matrix }}
         
   test:
     
