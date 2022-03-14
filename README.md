@@ -32,7 +32,7 @@ Example:
 
 jobs:
 
-  create_matrix:
+  prepare:
     
     runs-on: ubuntu-latest  
     
@@ -41,9 +41,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - name: Set matrix
-        id: set_matrix
-        uses: fabiocaccamo/create-matrix-action@v2
+      - name: Create matrix
+        id: create_matrix
+        uses: ./
         with:
           matrix: |
             python-version {2.7}, django-version {1.7,1.8,1.9,1.10,1.11}, database {sqlite,mysql,postgres}
@@ -54,16 +54,16 @@ jobs:
             python-version {3.10}, django-version {3.2,4.0}, database {sqlite,mysql,postgres}
           
     outputs:
-      matrix: ${{ steps.set_matrix.outputs.matrix }}
-        
+      matrix: ${{ steps.create_matrix.outputs.matrix }}
+    
   test:
     
-    needs: create_matrix
+    needs: prepare
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix: 
-        include: ${{fromJson(needs.create_matrix.outputs.matrix)}}
+        include: ${{fromJson(needs.prepare.outputs.matrix)}}
 
     # ...
 
