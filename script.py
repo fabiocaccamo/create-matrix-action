@@ -5,7 +5,6 @@ from itertools import product
 import json
 import os
 import re
-import sys
 
 
 def main():
@@ -29,7 +28,9 @@ def main():
                 matrix_item.update(item)
             matrix_items.append(matrix_item)
     matrix_json = json.dumps(matrix_items)
-    sys.stdout.write(f"::set-output name=matrix::{matrix_json}")
+    matrix_data = f"\nmatrix={matrix_json}\n".encode("utf-8")
+    with open(os.environ["GITHUB_OUTPUT"], "ab") as file:
+        file.write(matrix_data)
 
 
 if __name__ == "__main__":

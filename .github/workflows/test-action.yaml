@@ -3,18 +3,18 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-  
+
 jobs:
 
   prepare:
-    
-    runs-on: ubuntu-latest  
-    
+
+    runs-on: ubuntu-latest
+
     steps:
-      
+
       - name: Checkout code
-        uses: actions/checkout@v2
-      
+        uses: actions/checkout@v3
+
       - name: Create matrix
         id: create_matrix
         uses: ./
@@ -26,39 +26,39 @@ jobs:
             python-version {3.8}, django-version {2.2,3.0,3.1,3.2}, database {sqlite,mysql,postgres}
             python-version {3.9}, django-version {2.2,3.0,3.1,3.2}, database {sqlite,mysql,postgres}
             python-version {3.10}, django-version {3.2,4.0}, database {sqlite,mysql,postgres}
-          
+
     outputs:
       matrix: ${{ steps.create_matrix.outputs.matrix }}
-    
+
   test:
-    
+
     needs: prepare
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix: 
+      matrix:
         include: ${{fromJson(needs.prepare.outputs.matrix)}}
-      
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
-      
+
       - name: Upgrade pip version
         run: |
           pip install pip --upgrade
-      
+
       - name: Install django
         run: |
           pip install "Django~=${{ matrix.django-version }}"
-      
+
       - name: Debug matrix
         run: |
           echo "Python ${{ matrix.python-version }} + Django ${{ matrix.django-version }} + Database ${{ matrix.database }}"
           echo "Python: `python --version`"
           echo "Django: `django-admin --version`"
-          
+
