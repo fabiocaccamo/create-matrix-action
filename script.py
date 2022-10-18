@@ -10,7 +10,9 @@ import sys
 
 def main():
     matrix_str = os.environ["INPUT_MATRIX"]
-    matrix_lines = list(filter(bool, [line.strip() for line in matrix_str.splitlines()]))
+    matrix_lines = list(
+        filter(bool, [line.strip() for line in matrix_str.splitlines()])
+    )
     matrix_items = []
     for line in matrix_lines:
         matches = re.findall(r"(([\w\-]+){1}(?:\s+)?\{(.+?(?=\})){1}\})+", line)
