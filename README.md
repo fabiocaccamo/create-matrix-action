@@ -1,4 +1,4 @@
-[![](https://img.shields.io/github/workflow/status/fabiocaccamo/create-matrix-action/Test%20Action?logo=github)](https://github.com/fabiocaccamo/create-matrix-action)
+[![](https://img.shields.io/github/actions/workflow/status/fabiocaccamo/create-matrix-action/test-action.yaml?branch=main&label=build&logo=github)](https://github.com/fabiocaccamo/create-matrix-action)
 [![](https://img.shields.io/github/stars/fabiocaccamo/create-matrix-action?logo=github)](https://github.com/fabiocaccamo/create-matrix-action/)
 [![](https://img.shields.io/github/sponsors/fabiocaccamo?color=blueviolet&logo=github)](https://github.com/sponsors/fabiocaccamo)
 [![](https://img.shields.io/twitter/follow/fabiocaccamo)](https://twitter.com/fabiocaccamo)
