@@ -1,5 +1,5 @@
 [![](https://img.shields.io/github/actions/workflow/status/fabiocaccamo/create-matrix-action/test-action.yaml?branch=main&label=build&logo=github)](https://github.com/fabiocaccamo/create-matrix-action)
-[![](https://img.shields.io/github/stars/fabiocaccamo/create-matrix-action?logo=github)](https://github.com/fabiocaccamo/create-matrix-action/)
+[![](https://img.shields.io/github/stars/fabiocaccamo/create-matrix-action?logo=github)](https://github.com/fabiocaccamo/create-matrix-action/stargazers)
 [![](https://img.shields.io/github/sponsors/fabiocaccamo?color=blueviolet&logo=github)](https://github.com/sponsors/fabiocaccamo)
 [![](https://img.shields.io/twitter/follow/fabiocaccamo)](https://twitter.com/fabiocaccamo)
 
@@ -33,14 +33,14 @@ Example:
 jobs:
 
   prepare:
-    
-    runs-on: ubuntu-latest  
-    
+
+    runs-on: ubuntu-latest
+
     steps:
-      
+
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - name: Create matrix
         id: create_matrix
         uses: ./
@@ -52,25 +52,25 @@ jobs:
             python-version {3.8}, django-version {2.2,3.0,3.1,3.2}, database {sqlite,mysql,postgres}
             python-version {3.9}, django-version {2.2,3.0,3.1,3.2}, database {sqlite,mysql,postgres}
             python-version {3.10}, django-version {3.2,4.0}, database {sqlite,mysql,postgres}
-          
+
     outputs:
       matrix: ${{ steps.create_matrix.outputs.matrix }}
-    
+
   test:
-    
+
     needs: prepare
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix: 
+      matrix:
         include: ${{fromJson(needs.prepare.outputs.matrix)}}
 
     # ...
 
     steps:
-      
+
       # ...
-      
+
       - name: Debug matrix
         run: |
           echo "Python ${{ matrix.python-version }} + Django ${{ matrix.django-version }} + Database ${{ matrix.database }}"
