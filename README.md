@@ -17,9 +17,10 @@ Example:
 python-version {2.7}, django-version {1.7,1.8,1.9,1.10,1.11}, database {sqlite,mysql,postgres}
 python-version {3.6}, django-version {1.8,1.9,1.10,1.11,2.0,2.1,2.2,3.0,3.1,3.2}, database {sqlite,mysql,postgres}
 python-version {3.7}, django-version {2.0,2.1,2.2,3.0,3.1,3.2}, database {sqlite,mysql,postgres}
-python-version {3.8}, django-version {2.2,3.0,3.1,3.2}, database {sqlite,mysql,postgres}
-python-version {3.9}, django-version {2.2,3.0,3.1,3.2}, database {sqlite,mysql,postgres}
-python-version {3.10}, django-version {3.2,4.0}, database {sqlite,mysql,postgres}
+python-version {3.8}, django-version {2.2,3.0,3.1,3.2,4.0,4.1}, database {sqlite,mysql,postgres}
+python-version {3.9}, django-version {2.2,3.0,3.1,3.2,4.0,4.1}, database {sqlite,mysql,postgres}
+python-version {3.10}, django-version {3.2,4.0,4.1}, database {sqlite,mysql,postgres}
+python-version {3.11}, django-version {4.1}, database {sqlite,mysql,postgres}
 ```
 
 > **Note:** *In the above example, `python-version`, `django-version` and `database` are just the matrix variable names that we can access in the following step, so it is possible to name these variables as needed.*
