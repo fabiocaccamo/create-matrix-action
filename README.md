@@ -41,7 +41,7 @@ jobs:
 
       - name: Create matrix
         id: create_matrix
-        uses: ./
+        uses: fabiocaccamo/create-matrix-action@v3
         with:
           matrix: |
             python-version {3.8}, django-version {3.0,3.1,3.2,4.0,4.1}, database {sqlite,mysql,postgres}
