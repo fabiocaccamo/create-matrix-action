@@ -14,10 +14,10 @@ I wrote this action for my python/django testing needs, but it is very flexible 
 
 Example:
 ```
-python-version {3.8}, django-version {3.0,3.1,3.2,4.0,4.1}, database {sqlite,mysql,postgres}
-python-version {3.9}, django-version {3.0,3.1,3.2,4.0,4.1}, database {sqlite,mysql,postgres}
-python-version {3.10}, django-version {3.2,4.0,4.1}, database {sqlite,mysql,postgres}
-python-version {3.11}, django-version {4.1}, database {sqlite,mysql,postgres}
+python-version {3.10}, django-version {4.0, 4.1, 4.2, 5.0, 5.1}, database {sqlite, mysql, postgres}
+python-version {3.11}, django-version {4.1, 4.2, 5.0, 5.1}, database {sqlite, mysql, postgres}
+python-version {3.12}, django-version {4.2, 5.0, 5.1}, database {sqlite, mysql, postgres}
+python-version {3.13}, django-version {5.1}, database {sqlite, mysql, postgres}
 ```
 
 > **Note:** *In the above example, `python-version`, `django-version` and `database` are just the matrix variable names that we can access in the following step, so it is possible to name these variables as needed.*
@@ -44,10 +44,10 @@ jobs:
         uses: fabiocaccamo/create-matrix-action@v3
         with:
           matrix: |
-            python-version {3.8}, django-version {3.0,3.1,3.2,4.0,4.1}, database {sqlite,mysql,postgres}
-            python-version {3.9}, django-version {3.0,3.1,3.2,4.0,4.1}, database {sqlite,mysql,postgres}
-            python-version {3.10}, django-version {3.2,4.0,4.1}, database {sqlite,mysql,postgres}
-            python-version {3.11}, django-version {4.1}, database {sqlite,mysql,postgres}
+            python-version {3.10}, django-version {4.0, 4.1, 4.2, 5.0, 5.1}, database {sqlite, mysql, postgres}
+            python-version {3.11}, django-version {4.1, 4.2, 5.0, 5.1}, database {sqlite, mysql, postgres}
+            python-version {3.12}, django-version {4.2, 5.0, 5.1}, database {sqlite, mysql, postgres}
+            python-version {3.13}, django-version {5.1}, database {sqlite, mysql, postgres}
 
     outputs:
       matrix: ${{ steps.create_matrix.outputs.matrix }}
