@@ -1,0 +1,30 @@
+[tool.black]
+line-length = 88
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | venv
+)/
+'''
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+ignore = []
+select = ["B", "B9", "C", "E", "F", "W"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
