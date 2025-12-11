@@ -7,8 +7,19 @@ inputs:
     description: The matrix string definition.
 
 runs:
-  using: docker
-  image: 'Dockerfile'
+  using: composite
+  steps:
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Run matrix creation script
+      run: python ${{ github.action_path }}/script.py
+      shell: bash
+      env:
+        INPUT_MATRIX: ${{ inputs.matrix }}
 
 branding:
   icon: grid
