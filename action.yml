@@ -6,6 +6,11 @@ inputs:
     required: true
     description: The matrix string definition.
 
+outputs:
+  matrix:
+    description: The generated matrix in JSON format.
+    value: ${{ steps.create_matrix.outputs.matrix }}
+
 runs:
   using: composite
   steps:
@@ -16,6 +21,7 @@ runs:
         python-version: '3.x'
 
     - name: Run matrix creation script
+      id: create_matrix
       run: python ${{ github.action_path }}/script.py
       shell: bash
       env:
