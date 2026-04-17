@@ -417,7 +417,7 @@ def test_parse_matrix(input_matrix, expected_output_matrix):
     ],
 )
 def test_parse_matrix_raises(input_matrix):
-    with pytest.raises((AssertionError, Exception)):
+    with pytest.raises(ValueError):
         parse_matrix(input_matrix)
 
 

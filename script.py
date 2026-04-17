@@ -14,12 +14,15 @@ def parse_matrix(matrix_str):
     matrix_items = []
     for line in matrix_lines:
         matches = re.findall(r"([\w\-]+)\s*\{([^}]+)\}", line)
-        assert len(matches)
+        if not matches:
+            raise ValueError(f"Invalid matrix line, no valid group found: {line!r}")
         groups = {}
         for match in matches:
-            assert len(match) == 2
+            if len(match) != 2:
+                raise ValueError(f"Invalid match structure in line {line!r}: {match!r}")
             values = parse_list(match[1].split(","))
-            assert len(values)
+            if not values:
+                raise ValueError(f"Empty values list for group {match[0]!r} in line {line!r}")
             group_name = match[0].strip()
             groups[group_name] = [{group_name: value.strip()} for value in values]
         for value in product(*groups.values()):
