@@ -11,6 +11,25 @@ from script import parse_matrix
             [],
         ),
         (
+            "python-version{3.10}",
+            [
+                {"python-version": "3.10"},
+            ],
+        ),
+        (
+            "python-version{3.10,3.11}",
+            [
+                {"python-version": "3.10"},
+                {"python-version": "3.11"},
+            ],
+        ),
+        (
+            "python-version{3.10},django-version{5.0}",
+            [
+                {"python-version": "3.10", "django-version": "5.0"},
+            ],
+        ),
+        (
             "python-version{3.10,3.11,3.12},django-version{5.0,5.1},database{sqlite,postgres}",
             [
                 {
@@ -379,13 +398,27 @@ from script import parse_matrix
         ),
     ],
 )
-def test_parse_matrix_with_empty_string(input_matrix, expected_output_matrix):
+def test_parse_matrix(input_matrix, expected_output_matrix):
     output_matrix = parse_matrix(input_matrix)
     try:
         assert output_matrix == expected_output_matrix
     except AssertionError:
         # print(output_matrix)
         raise
+
+
+@pytest.mark.parametrize(
+    "input_matrix",
+    [
+        "no-braces",
+        "python-version",
+        "{3.10,3.11}",
+        "python-version{}",
+    ],
+)
+def test_parse_matrix_raises(input_matrix):
+    with pytest.raises(ValueError):
+        parse_matrix(input_matrix)
 
 
 if __name__ == "__main__":

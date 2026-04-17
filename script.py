@@ -13,14 +13,17 @@ def parse_matrix(matrix_str):
     matrix_lines = parse_list(matrix_str.splitlines())
     matrix_items = []
     for line in matrix_lines:
-        matches = re.findall(r"(([\w\-]+){1}(?:\s+)?\{(.+?(?=\})){1}\})+", line)
-        assert len(matches)
+        matches = re.findall(r"([\w\-]+)\s*\{([^}]+)\}", line)
+        if not matches:
+            raise ValueError(f"Invalid matrix line, no valid group found: {line!r}")
         groups = {}
         for match in matches:
-            assert len(match) == 3
-            values = parse_list(match[2].split(","))
-            assert len(values)
-            group_name = match[1].strip()
+            if len(match) != 2:
+                raise ValueError(f"Invalid match structure in line {line!r}: {match!r}")
+            values = parse_list(match[1].split(","))
+            if not values:
+                raise ValueError(f"Empty values list for group {match[0]!r} in line {line!r}")
+            group_name = match[0].strip()
             groups[group_name] = [{group_name: value.strip()} for value in values]
         for value in product(*groups.values()):
             matrix_item = {}
